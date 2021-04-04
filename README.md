@@ -48,7 +48,7 @@ Building (Manuallly)
 debuild -us -uc -b
 ```
 
-* Please 'Star' or 'Watch' the repo on github: https://github.com/langemeijer/phpstorm-deb/stargazers
+* Please 'Star' or 'Watch' the repo on github: https://github.com/aglowienka/phpstorm-deb/stargazers
 
 Installing
 ----------
