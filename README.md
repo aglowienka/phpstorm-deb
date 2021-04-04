@@ -9,8 +9,17 @@ Dependencies
 
 You will need the `devscripts` `debhelper` `php` and `php-curl` packages installed in order to build the PhpStorm `.deb` file:
 
-```sh
-apt-get install devscripts debhelper php php-curl
+```shell
+apt install devscripts debhelper build-essential
+```
+
+You will also need PHP interpreter and curl extension. Depending on your setup it might look liike this:
+```shell
+apt install php php-curl 
+```
+or something like this (ie. when using Ondrej Sury PPA)
+```shell
+apt install php8.0 php8.0-curl 
 ```
 
 Build (Automatic)
