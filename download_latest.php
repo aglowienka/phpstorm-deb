@@ -5,6 +5,10 @@
  echo "Cleaning up old installs\n";
  array_map('unlink', glob("*.tar.gz"));
  array_map('unlink', glob("*.sha256"));
+ array_map('unlink', glob("../*.deb"));
+ array_map('unlink', glob("../*.build"));
+ array_map('unlink', glob("../*.buildinfo"));
+ array_map('unlink', glob("../*.changes"));
 
  echo "Downloading new version\n";
  $url = "https://data.services.jetbrains.com/products/releases?code=PS&latest=true";
@@ -43,7 +47,15 @@ exec("debuild -us -uc -b");
 
 $debname = str_replace("-","_",strtolower(basename($filename,".tar.gz"))."_all.deb");
 echo "Build complete. Install the new version by using \n";
-echo "sudo dpkg -i ../$debname";
+echo "sudo dpkg -i ../$debname\n";
+echo "Do you want to execute it? [y/N]";
+$handle = fopen ("php://stdin","r");
+$line = fgets($handle);
+if(trim($line) == 'y')
+{
+  passthru("sudo dpkg -i ../$debname");
+}
+fclose($handle);
 
 function curlDownload($url, $destination = null)
 {
