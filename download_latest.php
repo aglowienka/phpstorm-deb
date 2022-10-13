@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
- $dir = dirname(__FILE__);
+ $dir = __DIR__;
 
  echo "Cleaning up old installs\n";
  array_map('unlink', glob("*.tar.gz"));
@@ -49,9 +49,9 @@ $debname = str_replace("-","_",strtolower(basename($filename,".tar.gz"))."_all.d
 echo "Build complete. Install the new version by using \n";
 echo "sudo dpkg -i ../$debname\n";
 echo "Do you want to execute it? [y/N]";
-$handle = fopen ("php://stdin","r");
+$handle = fopen ("php://stdin", 'rb');
 $line = fgets($handle);
-if(trim($line) == 'y')
+if(trim($line) === 'y')
 {
   passthru("sudo dpkg -i ../$debname");
 }
@@ -70,8 +70,8 @@ function curlDownload($url, $destination = null)
  curl_close($ch);
  if ($destination)
  {
-   $file = fopen($destination, "w+");
-   fputs($file, $result);
+   $file = fopen($destination, 'wb+');
+   fwrite($file, $result);
    fclose($file);
  }
 
